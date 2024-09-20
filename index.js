@@ -36,6 +36,11 @@ const cadastrarMeta = async () => {
 };
 
 const listarMetas = async () => {
+  if (respostas.length == 0) {
+    mensagem = 'Você não marcou nenhuma meta!';
+    return;
+  }
+
   const respostas = await checkbox({
     message:
       'Use as setas para mudar de meta o espaço para marcar ou desmarcar, e o Enter para finalizar essa etapa:',
@@ -47,11 +52,6 @@ const listarMetas = async () => {
     m.checked = false;
   });
 
-  if (respostas.length == 0) {
-    mensagem = 'Você não marcou nenhuma meta!';
-    return;
-  }
-
   respostas.forEach(resposta => {
     const meta = metas.find(m => {
       return m.value == resposta;
@@ -62,6 +62,10 @@ const listarMetas = async () => {
 };
 
 const metasRealizadas = async () => {
+  if (respostas.length == 0) {
+    mensagem = 'Você não marcou nenhuma meta!';
+    return;
+  }
   const realizadas = metas.filter(meta => {
     return meta.checked;
   });
@@ -78,6 +82,10 @@ const metasRealizadas = async () => {
 };
 
 const metasAbertas = async () => {
+  if (respostas.length == 0) {
+    mensagem = 'Você não marcou nenhuma meta!';
+    return;
+  }
   const abertas = metas.filter(meta => {
     return !meta.checked;
   });
@@ -93,6 +101,10 @@ const metasAbertas = async () => {
 };
 
 const deletarMetas = async () => {
+  if (respostas.length == 0) {
+    mensagem = 'Você não marcou nenhuma meta!';
+    return;
+  }
   const metasDesmarcadas = metas.map(meta => {
     return { value: meta.value, checked: false };
   });
